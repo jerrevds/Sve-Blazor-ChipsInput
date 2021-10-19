@@ -223,7 +223,7 @@
         validationErrors.Clear();
 
         if (EnableBackspaceRemove && args.Key == "Backspace" && Chips.Count > 0 && prevInputValue.Length == 0 && !ReadonlyChips) RemoveChip(Chips.Last());
-        if (args.Key != "Enter" || Chips.Contains(currentInputValue, StringComparer.OrdinalIgnoreCase)) return;
+        if ((args.Key != "Enter" && args.Key != ";" && args.Key != " " && args.Key != ",") || Chips.Contains(currentInputValue, StringComparer.OrdinalIgnoreCase)) return;
         if (CustomValidation.HasDelegate) CustomValidation.InvokeAsync(new ChipValidationArgs(Chips, currentInputValue, validationErrors));
         if (string.IsNullOrEmpty(currentInputValue) && !AllowEmptyValue) validationErrors.Add(AllowEmptyValueValidationMessage);
         if (MaxValueCount != null && Chips.Count == MaxValueCount) validationErrors.Add(MaxValueCountValidationMessage);
